@@ -1,1 +1,0 @@
-If use PCA data accuracy is increase.
