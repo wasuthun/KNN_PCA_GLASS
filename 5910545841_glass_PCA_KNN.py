@@ -15,10 +15,10 @@ import pandas as pd
 # Importing the dataset
 
 dataset = pd.read_csv('/Users/johnpaul/Downloads/Downloads/Glass.csv',sep=';')
-dataset = dataset.drop(['ID','RI'],axis = 1)
+dataset = dataset.drop(['ID'],axis = 1)
 
-X = dataset.iloc[:, 0:8].values
-y = dataset.iloc[:, 8].values
+X = dataset.iloc[:, 0:9].values
+y = dataset.iloc[:, 9].values
 # Splitting the dataset into the Training set and Test set
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 1992)
@@ -31,7 +31,7 @@ X_test = sc.transform(X_test)
 
 #PCA
 from sklearn.decomposition import PCA
-pca=PCA(n_components=8)
+pca=PCA(n_components=7, copy=True)
 X_train = pca.fit_transform(X_train)
 X_test = pca.transform(X_test)
 variance= pca.explained_variance_ratio_
@@ -47,6 +47,7 @@ y_pred = classifier.predict(X_test)
 # Making the Confusion Matrix
 from sklearn.metrics import confusion_matrix
 cm = confusion_matrix(y_test, y_pred)
+print(cm)
 
 ## Homework 2b
 from sklearn.neighbors import KNeighborsClassifier
